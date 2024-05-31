@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TestController!{% endblock %}
+
+{% block body %}
+    <h1>Заказать услугу оценки</h1>
+    
+    {% if add_ok !=0 %}
+      
+           
+           <div class="mess">Добавлено! </div>
+       {% endif %}
+       
+       
+    {{ form_start(form) }}
+
+    <div class="form-group">
+    {{ form_row(form.service, { 'attr': {'class' : 'form-control', 'required': true,}}) }}
+    </div>
+    <div class="form-group">
+       {{ form_row(form.email, { 'attr': {'class' : 'form-control'}}) }}
+       </div>
+    <div class="form-group">
+      
+       {{ form_row(form.coast, { 'attr': {'class' : 'hide',  value : '0' }}) }}
+       <span id="coast">0</span>
+       </div>
+  
+    <button class="btn btn-primary" type="submit">Сохранить</button>
+    {{ form_end(form) }}
+
+<script type="text/javascript">
+        document.getElementById("order_service").addEventListener("change", function(){
+            var select = document.querySelector("#order_service");
+            var coast = select.options[select.selectedIndex].getAttribute('data-coast');
+            document.getElementById('coast').innerHTML = coast;   
+            const inputElement = document.getElementById('order_coast');
+            inputElement.value = coast;
+        });
+</script>
+
+
+<style>
+    .hide {display:none;}
+</style>
+
+{% endblock %}
